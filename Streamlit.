@@ -1,0 +1,79 @@
+
+import streamlit as st
+
+# Page configuration
+st.set_page_config(
+    page_title="CareerPath AI",
+    page_icon="🎓",
+    layout="centered"
+)
+
+# Website heading
+st.title("🎓 CareerPath AI")
+
+st.subheader("Discover Your Future Career")
+
+st.write(
+    "Explore career opportunities based on "
+    "your favourite subjects and interests."
+)
+
+st.divider()
+
+# Student information form
+st.header("Student Information")
+
+with st.form("career_form"):
+
+    name = st.text_input("Enter your name")
+
+    student_class = st.selectbox(
+        "Select your class",
+        ["Class 11", "Class 12"]
+    )
+
+    subjects = [
+        "Biology",
+        "Chemistry",
+        "Physics",
+        "Mathematics",
+        "English",
+        "Fine Arts",
+        "Psychology"
+    ]
+
+    selected_subjects = st.multiselect(
+        "Select your interested subjects",
+        subjects
+    )
+
+    submitted = st.form_submit_button(
+        "Recommend Careers 🚀"
+    )
+
+# Display submitted information
+if submitted:
+
+    if not name.strip():
+        st.warning("Please enter your name.")
+
+    elif not selected_subjects:
+        st.warning("Please select at least one subject.")
+
+    else:
+        st.success("Your information has been submitted!")
+
+        st.header("Your Student Profile")
+
+        st.write("Name:", name)
+        st.write("Class:", student_class)
+
+        st.write("Selected Subjects:")
+
+        for subject in selected_subjects:
+            st.write("✅", subject)
+
+        st.info(
+            "Your career recommendations "
+            "will appear here."
+        )
